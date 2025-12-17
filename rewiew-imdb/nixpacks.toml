@@ -1,0 +1,15 @@
+[phases.setup]
+nixPkgs = ['python311', 'nodejs-18_x']
+
+[phases.install]
+cmds = [
+  'cd review-imdb && npm install'
+]
+
+[phases.build]
+cmds = [
+  'cd review-imdb && npm run build'
+]
+
+[start]
+cmd = 'cd review-imdb && gunicorn api_server:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120'
